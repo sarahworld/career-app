@@ -1,5 +1,3 @@
-// File: context/AuthContext.tsx
-typescript
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useGoogleAuthNative } from '../hooks/useGoogleAuth.native';
@@ -32,7 +30,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
 
-    // Keep hook at top level
     const googleAuth = useGoogleAuthNative();
 
     const login = useCallback(async (provider: 'google' | 'facebook' | 'linkedin'): Promise<void> => {
@@ -45,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
             const result = await googleAuth.signIn();
 
             if (!result) {
-                // sign-in cancelled or no-op
+                // sign in fail or no-op
                 return;
             }
 

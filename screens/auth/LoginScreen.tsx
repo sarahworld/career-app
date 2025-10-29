@@ -4,10 +4,6 @@ import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import * as Font from "expo-font";
 import LoginButton from "../../components/LoginButton";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 const { width } = Dimensions.get('window');
 
 const LoginScreen: React.FC = () => {
@@ -24,11 +20,7 @@ const LoginScreen: React.FC = () => {
         }
         loadFonts();
     }, [])
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
@@ -37,12 +29,10 @@ const LoginScreen: React.FC = () => {
                 </View>
             </View>
 
-<<<<<<< HEAD
+
             <LoginButton title="Google Login" onPress={() => {login("google")}}/>
-=======
-            <LoginButton title="Google Login" onPress={login} />
->>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
-            <LoginButton  title="Facebook Login" onPress={login} />
+
+            <LoginButton  title="Facebook Login" onPress={() => {login("facebook")}}/>
         </View>
     );
 };
