@@ -42,10 +42,13 @@ export default function CategorySelectionScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+<<<<<<< HEAD
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
+=======
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
         backgroundColor: '#e7dce8',
         paddingTop: 10,
     },

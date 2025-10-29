@@ -1,5 +1,9 @@
 // screens/PersonalityTestScreen.tsx
+<<<<<<< HEAD
 import React, { useMemo, useState, useCallback } from "react";
+=======
+import React, { useMemo, useState } from "react";
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 import {
     View,
     Text,
@@ -7,6 +11,7 @@ import {
     TouchableOpacity,
     FlatList,
     Platform,
+<<<<<<< HEAD
     Dimensions,
     ScrollView
 
@@ -17,6 +22,9 @@ import { BASE_TEST_QUESTIONS, HexacoQuestion } from "../assets/TestsQuestions/ne
 import { useHexacoTest } from "../components/HEXACO_Hook";
 import { buildHexacoSubmissionPayload} from "../utils/hexacoPayload";
 
+=======
+} from "react-native";
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 
 /* ----------------------- Theme ----------------------- */
 const COLORS = {
@@ -32,11 +40,17 @@ const COLORS = {
     greenDark: "#2BA425",
     greenLight: "#bfe8c1",
     neutral: "#cccccc",
+<<<<<<< HEAD
     pink: "#e23f93",
 };
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 
+=======
+};
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 /* ----------------------- Reusable UI ----------------------- */
 const Header: React.FC<{ title: string; onBack?: () => void }> = ({
                                                                       title,
@@ -98,6 +112,7 @@ const ChoicePill: React.FC<PillProps & { style?: any }> = ({
 type LikertRowProps = {
     id: string;
     text: string;
+<<<<<<< HEAD
     questionNumber?: number; // Add this new prop
     value?: 1 | 2 | 3 | 4 | 5; // 1..5
     onChange: (id: string, val: 1 | 2 | 3 | 4 | 5) => void;
@@ -111,18 +126,32 @@ const LikertRow: React.FC<LikertRowProps> = ({
                                                  id,
                                                  text,
                                                  questionNumber,
+=======
+    value?: number; // 1..5
+    onChange: (id: string, val: number) => void;
+    bold?: boolean;
+};
+const LikertRow: React.FC<LikertRowProps> = ({
+                                                 id,
+                                                 text,
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
                                                  value,
                                                  onChange,
                                                  bold,
                                              }) => (
     <View style={{ marginBottom: 16 }}>
+<<<<<<< HEAD
         <Text style={[styles.qText]}>
             {questionNumber ? `${questionNumber}. ` : ''}{text}
         </Text>
+=======
+        <Text style={[styles.qText]}>{text}</Text>
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
         <View style={styles.pillRow}>
             {[1,2,3,4,5].map((val, idx) => {
                 const allowedColors: Array<"redDark" | "red" | "neutral" | "green" | "greenDark"> =
                     ["redDark", "red", "neutral", "green", "greenDark"];
+<<<<<<< HEAD
                 const handleSelection = () => onChange(id, val as 1 | 2 | 3 | 4 | 5);
 
                 return (
@@ -134,6 +163,16 @@ const LikertRow: React.FC<LikertRowProps> = ({
                         onPress={handleSelection}
                         style={idx < 4 ? { marginRight: 8 } : { marginRight: 0 }}
 
+=======
+                return (
+                    <ChoicePill
+                        key={val}
+                        label={["Strongly disagree", "disagree", "Neutral", "Agree", "Strongly Agree"][idx]}
+                        color={allowedColors[idx]}
+                        selected={value === val}
+                        onPress={() => onChange(id, val)}
+                        style={idx < 4 ? { marginRight: 8 } : { marginRight: 0 }}
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
                     />
                 );
             })}
@@ -151,13 +190,18 @@ const PrimaryButton: React.FC<{ title: string; onPress: () => void }> = ({
 );
 
 /* ----------------------- Types ----------------------- */
+<<<<<<< HEAD
 type Question = { id: string; order: number; text: string; bold?: boolean };
+=======
+type Question = { id: string; text: string; bold?: boolean };
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 type Props = {};
 
 /* ----------------------- Screen ----------------------- */
 const PersonalityTestScreen: React.FC<Props> = () => {
 
     const navigation = useNavigation<NavigationProp<any>>();
+<<<<<<< HEAD
     const questions = useMemo(
         () =>
             Object.entries(BASE_TEST_QUESTIONS)
@@ -194,10 +238,50 @@ const PersonalityTestScreen: React.FC<Props> = () => {
 
     return (
         <SafeAreaView style={styles.root} edges={['top', 'left', 'right']}>
+=======
+    const questions: Question[] = useMemo(
+        () => [
+            {
+                id: "q1",
+                text: "I would be quite bored by a visit to an art gallery.",
+
+            },
+            {
+                id: "q2",
+                text: "I plan ahead and organize things, to avoid scrambling at the last minute..",
+            },
+            {
+                id: "q3",
+                text: "I plan ahead and organize things, to avoid scrambling at the last minute..",
+            },
+        ],
+        []
+    );
+
+    const [answers, setAnswers] = useState<Record<string, number>>({});
+
+    const setAnswer = (id: string, val: number) =>
+        setAnswers((prev) => ({ ...prev, [id]: val }));
+
+    const onSubmit = () => {
+        // Example: compute mean score (1..5)
+        const vals = Object.values(answers);
+        const mean = vals.length
+            ? vals.reduce((a, b) => a + b, 0) / vals.length
+            : 0;
+        console.log("answers:", answers, "mean:", mean);
+        navigation.navigate("ReportScreen")
+        // TODO: map to HEXACO/Big-5 traits and navigate to results
+
+    };
+
+    return (
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
         <View style={styles.root}>
             <Header title="Personality Test" onBack={() => navigation?.goBack?.()} />
 
             <Card style={{ marginTop: 10 }}>
+<<<<<<< HEAD
                 <ScrollView showsVerticalScrollIndicator={true}>
                     {error && (
                         <View style={styles.errorContainer}>
@@ -235,6 +319,31 @@ const PersonalityTestScreen: React.FC<Props> = () => {
     );
 }
 
+=======
+                <FlatList
+                    data={questions}
+                    keyExtractor={(q) => q.id}
+                    renderItem={({ item }) => (
+                        <LikertRow
+                            id={item.id}
+                            text={item.text}
+                            value={answers[item.id]}
+                            onChange={setAnswer}
+                        />
+                    )}
+                    ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+                    showsVerticalScrollIndicator={false}
+                    ListFooterComponent={<View style={{ height: 8 }} />}
+                />
+            </Card>
+
+            <View style={styles.footer}>
+                <PrimaryButton title="Submit" onPress={onSubmit} />
+            </View>
+        </View>
+    );
+};
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 
 export default PersonalityTestScreen;
 
@@ -281,6 +390,7 @@ const styles = StyleSheet.create({
     },
 
     qText: {
+<<<<<<< HEAD
         fontSize: 18,
         color: COLORS.text,
         marginBottom: 5,
@@ -288,11 +398,21 @@ const styles = StyleSheet.create({
         fontFamily: "LilitaOne-Regular",
         letterSpacing: 1,
         textAlign: "left"
+=======
+        fontSize: 16,
+        color: COLORS.text,
+        marginBottom: 10,
+        fontWeight: "200",
+        fontFamily: "LilitaOne-Regular",
+        letterSpacing: 1,
+        textAlign: "left",
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
     },
 
 
     pillRow: {
         flexDirection: "row",
+<<<<<<< HEAD
         justifyContent:"flex-start",
         alignItems: "center",
         marginBottom:30
@@ -302,20 +422,36 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingVertical: 8,
         paddingHorizontal: 4,
+=======
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    pill: {
+        flex: 1,
+        paddingVertical: 10,
+        paddingHorizontal: 6,
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
         marginRight: 8, // Add margin except for last pill in render
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: "black",
         borderRadius: 20,
         shadowColor: "#000",
+<<<<<<< HEAD
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 1,
         elevation: 3,
+=======
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 1,
+        elevation: 5,
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
         minWidth: 0, // Allow shrinking
 
 
     },
     pillSelected: {
+<<<<<<< HEAD
         backgroundColor:COLORS.pink,
         transform: [{ translateY: -1}],
 
@@ -323,6 +459,13 @@ const styles = StyleSheet.create({
     pillText: {
         fontSize: 14, // reduced from 16
         fontWeight: "normal",
+=======
+        transform: [{ translateY: -1 }],
+    },
+    pillText: {
+        fontSize: 14, // reduced from 16
+        fontWeight: "400",
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
         fontFamily: "LilitaOne-Regular",
         letterSpacing: 1,
         textAlign: "center",
@@ -352,6 +495,7 @@ const styles = StyleSheet.create({
         fontFamily: "LilitaOne-Regular",
         letterSpacing: 1,
     },
+<<<<<<< HEAD
     errorContainer: {
         backgroundColor: '#ffebee',
             padding: 10,
@@ -365,4 +509,6 @@ const styles = StyleSheet.create({
             fontSize: 14,
     },
 
+=======
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 });

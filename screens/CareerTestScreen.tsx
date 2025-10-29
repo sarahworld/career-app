@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useMemo, useState, useCallback } from "react";
+=======
+import React, { useMemo, useState } from "react";
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 import {
     View,
     Text,
@@ -6,11 +10,17 @@ import {
     Switch,
     FlatList,
     TouchableOpacity,
+<<<<<<< HEAD
     Platform, ScrollView,
 } from "react-native";
 import {useRiasecTest} from "../components/RIASEC_Hook";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RIASEC_QUESTIONS_V1, RiasecQuestion} from "../assets/TestsQuestions/RIASEC";
+=======
+    Platform,
+} from "react-native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 
 // ---------------- Reusable UI bits ----------------
 const colors = {
@@ -69,6 +79,7 @@ type Question = { id: string; text: string; bold?: boolean };
 
 function CareerTestScreen() {
     const navigation = useNavigation<NavigationProp<any>>();
+<<<<<<< HEAD
     const questions: RiasecQuestion[] = useMemo(
 
         () => [...RIASEC_QUESTIONS_V1]
@@ -117,10 +128,43 @@ function CareerTestScreen() {
     };
 
 
+=======
+    const questions: Question[] = useMemo(
+        () => [
+            { id: "q1", text: "I like to work on cars:" },
+            { id: "q2", text: "I like to do puzzles" },
+            { id: "q3", text: "I am good at working independently", bold: true },
+            { id: "q4", text: "I like to work in teams" },
+            {
+                id: "q5",
+                text: "I am an ambitious person,\nI set goals for myself",
+                bold: true,
+            },
+            {
+                id: "q6",
+                text: "I like to organize things,\n(files, desks/offices)",
+                bold: true,
+            },
+        ],
+        []
+    );
+
+    const [answers, setAnswers] = useState<Record<string, boolean>>({});
+
+    const setAnswer = (id: string, v: boolean) =>
+        setAnswers((prev) => ({ ...prev, [id]: v }));
+
+    const onSubmit = () => {
+        const score = Object.values(answers).filter(Boolean).length;
+        console.log("Answers:", answers, "Score:", score);
+    };
+
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
     return (
         <View style={styles.root}>
             <Header title="Career Test" onBack={() => navigation.navigate("Home")} />
             <Card style={{ marginTop: 10 }}>
+<<<<<<< HEAD
                 <ScrollView showsVerticalScrollIndicator={true}>
                     {error && (
                         <View style={styles.errorContainer}>
@@ -129,24 +173,38 @@ function CareerTestScreen() {
                     )}
 
                     <FlatList
+=======
+                <FlatList
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
                     data={questions}
                     keyExtractor={(q) => q.id}
                     renderItem={({ item }) => (
                         <ToggleRow
                             id={item.id}
                             text={item.text}
+<<<<<<< HEAD
                             value={Boolean(answers[item.id])}
                             onChange={handleToggleAnswer}
+=======
+                            value={!!answers[item.id]}
+                            onChange={setAnswer}
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
                         />
                     )}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
                     showsVerticalScrollIndicator={false}
                 />
+<<<<<<< HEAD
                     </ScrollView>
             </Card>
             <View style={styles.footer}>
                 <PrimaryButton title={isSubmitting ? "Submitting..." : "Submit"}
                                onPress={(onSubmit)} />
+=======
+            </Card>
+            <View style={styles.footer}>
+                <PrimaryButton title="Submit" onPress={() => navigation.navigate("PersonalityTestScreen")} />
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
             </View>
         </View>
     );
@@ -233,6 +291,7 @@ const styles = StyleSheet.create({
         fontFamily: "LilitaOne-Regular",
         letterSpacing: 1,
     },
+<<<<<<< HEAD
     errorContainer: {
         backgroundColor: '#ffebee',
         padding: 10,
@@ -246,4 +305,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
 
+=======
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
 });

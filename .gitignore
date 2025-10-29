@@ -35,6 +35,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+<<<<<<< HEAD
 .idea
 tsconfig.json
 .env
+=======
+.idea
+>>>>>>> 0c8491aa1f711e5deac00ec37572dd49715776f2
